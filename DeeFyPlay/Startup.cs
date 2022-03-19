@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeeFyPlay.Infra;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace DeeFyPlay
 {
@@ -26,6 +29,21 @@ namespace DeeFyPlay
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "DeeFy Play API",
+                    Version = "v1"
+                });
+
+            });
+
+            services.AddDbContext<DeeFyDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("Connection"));
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,6 +53,20 @@ namespace DeeFyPlay
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(
+               options => options
+                   .SetIsOriginAllowed(x => _ = true)
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials());
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = "swagger";
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DeeFy Play v1");
+            });
 
             app.UseHttpsRedirection();
 
