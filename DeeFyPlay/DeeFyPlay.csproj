@@ -13,6 +13,7 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Infra\Configurations\" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
+    <None Remove="Controllers\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
@@ -27,5 +28,6 @@
     <Folder Include="Infra\" />
     <Folder Include="Model\" />
     <Folder Include="Infra\Configurations\" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 </Project>
