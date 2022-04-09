@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using DeeFyPlay.Infra;
 using DeeFyPlay.Model;
@@ -44,7 +45,7 @@ namespace DeeFyPlay.Controllers
         public void Put(int id, [FromBody] Usuario usuario)
         {
             usuario.Id = id;
-            _context.Update(usuario);
+            _context.Usuarios.Update(usuario);
             _context.SaveChanges();
         }
 
@@ -56,9 +57,10 @@ namespace DeeFyPlay.Controllers
 
             if (usuario != null)
             {
-                _context.Remove(usuario);
+                _context.Usuarios.Remove(usuario);
                 _context.SaveChanges();
             }
         }
     }
 }
+
