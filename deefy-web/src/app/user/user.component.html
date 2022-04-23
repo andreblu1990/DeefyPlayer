@@ -16,12 +16,19 @@
       <td> {{ usuario.nome }}</td>
       <td> {{ usuario.email }}</td>
       <td>
-        <button (click)="editar(usuario.id)" class="btn btn-light">
+        <button
+          (click)="editar(usuario.id)"
+          class="btn btn-light"
+          placement="top" ngbTooltip="Editar dados do usuário">
           <i class="bi bi-pencil"></i>
         </button>
       </td>
       <td>
-        <button (click)="excluir(usuario.id)" class="btn btn-light">
+        <button
+          (click)="excluir(usuario.id)"
+          class="btn btn-light"
+          data-toggle="tooltip"
+          placement="top" ngbTooltip="Excluir registro da base de dados">
           <i class="bi bi-trash"></i>
         </button>
       </td>

@@ -26,6 +26,20 @@ namespace DeeFyPlay.Controllers
             return _context.Usuarios.ToList();
         }
 
+        [HttpPost("login")]
+        public Usuario Login([FromBody] Login login)
+        {
+            var usuario = _context.Usuarios.Where(
+                x => x.Email == login.Email &&
+                    x.Senha == login.Senha).FirstOrDefault();
+
+            if (usuario == null)
+                throw new Exception("Usuario não encontrado");
+
+            return usuario;
+
+        }
+
         [HttpGet("{id}")]
         public Usuario Get(int id)
         {
