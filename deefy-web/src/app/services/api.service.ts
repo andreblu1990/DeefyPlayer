@@ -8,7 +8,7 @@ import { Usuario } from './model/usuario';
 })
 export class ApiService {
 
-  public url = "https://localhost:5001/api/";
+  public url = "https://localhost:44327/api/";
 
   constructor(private http: HttpClient) { }
 
@@ -24,7 +24,8 @@ export class ApiService {
     var httpOptions = {
       headers: headers
     }
-
+    console.log(fullurl)
+    console.log(json)
     return this.http.post(fullurl, json, httpOptions);
   }
 

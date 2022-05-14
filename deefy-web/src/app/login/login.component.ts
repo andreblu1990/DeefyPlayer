@@ -24,8 +24,10 @@ export class LoginComponent implements OnInit {
   }
 
   entrar(){
+
     if (this.email != "" && this.senha != ""){
-      this.loginService.entrar(this.email, this.senha);
+      console.log("entrar")
+      this.loginService.Entrar(this.email, this.senha);
     } else {
       alert("e-mail ou senha inválidos");
     }
